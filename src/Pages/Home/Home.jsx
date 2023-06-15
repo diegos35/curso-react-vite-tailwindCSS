@@ -1,13 +1,13 @@
-import Layout from "../../components/Layout"
+import Card from '../../components/Card';
+import Layout from '../../components/Layout';
 
 function Home() {
-  
   return (
     <Layout>
       Home
-    </Layout >
-
-  )
+      <Card />
+    </Layout>
+  );
 }
 
-export default Home
+export default Home;
