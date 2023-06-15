@@ -43,7 +43,7 @@ const Navbar = () => {
   let menu2 = [
     {
       to: '/email',
-      text: 'juanmer382@gmail.com',
+      text: 'diego@gmail.com',
       className: 'text-black/60'
     },
     {
@@ -70,7 +70,7 @@ const Navbar = () => {
 
   return (
 
-    <nav className="flex justify-between items-center fixed z-10 w-full py-5 px-8 text-sm font-light">
+    <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light">
       <ul className="flex items-center gap-3">
         {menu1.map(link => (
           <li
@@ -99,8 +99,12 @@ const Navbar = () => {
           >
             <NavLink
               to={link.to}
-              className={({ isActive }) => isActive ? activeStyle : undefined}
-            >
+              className={({ isActive }) => {
+                if (isActive && link.text !== "diego@gmail.com") {
+                  return activeStyle;
+                }
+                return undefined;
+                }}>
               {link.text}
             </NavLink>
           </li>

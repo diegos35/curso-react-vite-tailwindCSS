@@ -2,9 +2,9 @@ import React from 'react'
 
 function MyOrders() {
   return (
-    <div className="bg-red-100">
+    <Layout>
       MyOrders
-    </div>
+    </Layout>
   )
 }
 
