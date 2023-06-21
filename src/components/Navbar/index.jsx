@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ShoppingCartContext } from '../../Context';
+import { ShoppingBagIcon } from '@heroicons/react/24/solid';
 
 const Navbar = () => {
   const context = useContext(ShoppingCartContext); //parametro el contexto
@@ -67,7 +68,7 @@ const Navbar = () => {
     },
     {
       to: '/shoppcar',
-      text: '🛒',
+      text: '',
       className: '',
       showCount: true,
     },
@@ -87,7 +88,6 @@ const Navbar = () => {
                 return undefined;
               }}
             >
-              {location.pathname === '/shoppcar' && <li>{context.count}</li>}
               {link.text}
             </NavLink>
           </li>
@@ -106,8 +106,15 @@ const Navbar = () => {
                 return undefined;
               }}
             >
+              <div className='flex items-center'>
+                {link.showCount && (
+                  <span className='flex items-center'>
+                    <ShoppingBagIcon className='h-6 w-6' />
+                    <span className='ml-1'>{context.count}</span>
+                  </span>
+                )}
+              </div>
               {link.text}
-              {link.showCount && <span>{context.count}</span>}
             </NavLink>
           </li>
         ))}

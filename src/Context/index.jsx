@@ -13,7 +13,7 @@ export const ShoppingCartProvider = ({ children }) => {
         setCount,
       }}
     >
-      {children} //hijo toda la app
+      {children}
     </ShoppingCartContext.Provider>
   );
 };

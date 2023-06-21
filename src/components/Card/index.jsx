@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { ShoppingCartContext } from '../../Context';
+import { PlusIcon } from '@heroicons/react/24/solid';
 
 const Card = ({ price, title, images, category: { name } }) => {
   //const context = useContext(ShoppingCartContext); //parametro el contexto
@@ -22,7 +23,7 @@ const Card = ({ price, title, images, category: { name } }) => {
           onClick={() => setCount(count + 1)}
           className='absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1'
         >
-          +
+          <PlusIcon></PlusIcon>
         </button>
       </figure>
       <p className='flex justify-between'>
