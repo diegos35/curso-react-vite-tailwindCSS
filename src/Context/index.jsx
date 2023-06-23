@@ -14,6 +14,9 @@ export const ShoppingCartProvider = ({ children }) => {
 
   /* product Detail . show product */
   const [producToShow, setproducToShow] = useState({});
+
+  /* Shopping Cart . Add products to cart */
+  const [carProducts, setcarProducts] = useState([]);
   //console.log(count);
   return (
     <ShoppingCartContext.Provider
@@ -25,6 +28,8 @@ export const ShoppingCartProvider = ({ children }) => {
         producToShow,
         setproducToShow,
         isProductOpen,
+        carProducts,
+        setcarProducts,
       }}
     >
       {children}
