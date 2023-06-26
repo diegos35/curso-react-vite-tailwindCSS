@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { ShoppingCartContext } from '../../Context';
-import { PlusIcon } from '@heroicons/react/24/solid';
+import { PlusIcon, CheckIcon } from '@heroicons/react/24/solid';
 
 const Card = ({ category: { name }, ...props }) => {
   const {
@@ -12,15 +12,11 @@ const Card = ({ category: { name }, ...props }) => {
     carProducts,
     openCheckoutSideMenu,
     isCheckoutSideMenuOpen,
-    closeCheckoutSideMenu,
-    //closeProductDetail,
   } = useContext(ShoppingCartContext);
 
   const showProduct = (productDetail) => {
     openProductDetail();
     setproducToShow(productDetail);
-    console.log('other');
-    //closeCheckoutSideMenu();
   };
 
   const addProductsToCart = (event, productData) => {
@@ -28,9 +24,29 @@ const Card = ({ category: { name }, ...props }) => {
     setCount(count + 1);
     setcarProducts([...carProducts, { ...productData }]);
     openCheckoutSideMenu();
-    console.log('entra', isCheckoutSideMenuOpen);
-    //closeProductDetail();
-    //openCheckoutSideMenu();
+  };
+
+  const renderIcon = (id) => {
+    const isInCart =
+      carProducts.filter((product) => product.id === id).length > 0;
+    if (isInCart) {
+      return (
+        <div className='absolute top-0 right-0 flex justify-center items-center bg-black w-6 h-6 rounded-full m-2 p-1'>
+          <CheckIcon className='h-6 w-5 text-white'></CheckIcon>
+        </div>
+      );
+    } else {
+      return (
+        <div className='absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1'>
+          <PlusIcon
+            className='h-6 w-5 text-black'
+            onClick={(event) => {
+              addProductsToCart(event, { ...props });
+            }}
+          ></PlusIcon>
+        </div>
+      );
+    }
   };
 
   return (
@@ -47,13 +63,7 @@ const Card = ({ category: { name }, ...props }) => {
           src={props.images}
           alt={props.title}
         />
-        <div className='absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1'>
-          <PlusIcon
-            onClick={(event) => {
-              addProductsToCart(event, { ...props });
-            }}
-          ></PlusIcon>
-        </div>
+        {renderIcon(props.id)}
       </figure>
       <p className='flex justify-between'>
         <span className='text-sm font-light'>{props.title}</span>
