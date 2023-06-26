@@ -10,18 +10,27 @@ const Card = ({ category: { name }, ...props }) => {
     setproducToShow,
     setcarProducts,
     carProducts,
+    openCheckoutSideMenu,
+    isCheckoutSideMenuOpen,
+    closeCheckoutSideMenu,
+    //closeProductDetail,
   } = useContext(ShoppingCartContext);
 
   const showProduct = (productDetail) => {
     openProductDetail();
     setproducToShow(productDetail);
+    console.log('other');
+    //closeCheckoutSideMenu();
   };
 
-  const addProductsToCart = () => {
+  const addProductsToCart = (event, productData) => {
+    event.stopPropagation();
     setCount(count + 1);
-    setcarProducts([...carProducts, { ...props }]);
-
-    console.log('entra', carProducts);
+    setcarProducts([...carProducts, { ...productData }]);
+    openCheckoutSideMenu();
+    console.log('entra', isCheckoutSideMenuOpen);
+    //closeProductDetail();
+    //openCheckoutSideMenu();
   };
 
   return (
@@ -38,12 +47,13 @@ const Card = ({ category: { name }, ...props }) => {
           src={props.images}
           alt={props.title}
         />
-        <button
-          onClick={addProductsToCart}
-          className='absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1'
-        >
-          <PlusIcon></PlusIcon>
-        </button>
+        <div className='absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1'>
+          <PlusIcon
+            onClick={(event) => {
+              addProductsToCart(event, { ...props });
+            }}
+          ></PlusIcon>
+        </div>
       </figure>
       <p className='flex justify-between'>
         <span className='text-sm font-light'>{props.title}</span>
