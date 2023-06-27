@@ -1,27 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Card from '../../components/Card';
 import Layout from '../../components/Layout';
 import ProducDetail from '../../components/ProductDetail';
+import { ShoppingCartContext } from '../../Context';
 
 function Home() {
-  const [products, setProducts] = useState(null);
-
-  useEffect(() => {
-    const apiUrl = 'https://api.escuelajs.co/api/v1';
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${apiUrl}/products`);
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error(`Oh no, ocurrió un error: ${error}`);
-      }
-    };
-    fetchData();
-  }, []);
-
+  const { products, setSearchByTitle } = useContext(ShoppingCartContext);
   return (
     <Layout>
+      <div className='flex items-center justify-center relative w-80 mb-4'>
+        <h1 className='font-medium text-xl'>Exclusive Products</h1>
+      </div>
+      <input
+        type='text'
+        placeholder='Search a product'
+        className='rounded-lg border-black w-80 p-4 mb-4 focus:outline-none'
+        onChange={(event) => setSearchByTitle(event.target.value)}
+      />
       <div className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
         {products?.map((product) => (
           <Card key={product.id} {...product} />
