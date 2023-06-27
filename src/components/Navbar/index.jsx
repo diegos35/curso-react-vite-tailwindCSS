@@ -110,7 +110,7 @@ const Navbar = () => {
                 {link.showCount && (
                   <span className='flex items-center'>
                     <ShoppingBagIcon className='h-6 w-6' />
-                    <span className='ml-1'>{context.count}</span>
+                    <span className='ml-1'>{context.carProducts.length}</span>
                   </span>
                 )}
               </div>
