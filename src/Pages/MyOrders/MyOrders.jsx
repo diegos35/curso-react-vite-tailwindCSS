@@ -10,17 +10,17 @@ function MyOrders() {
 
   return (
     <Layout>
-      <div className='flex items-center  relative w-80'>
+      <div className='flex items-center justify-center relative w-80'>
         <h1>My Orders</h1>
       </div>
-      {order.map((order, index) => {
-        <Link key={index} to={`/my-orders/${order.id}`}>
+      {order.map((orderItem, index) => (
+        <Link key={index} to={`/my-orders/${index}`}>
           <OrdersCard
-            totalPrice={order.totalPrice}
-            totalProducts={order.totalProducts}
+            totalPrice={orderItem.totalPrice}
+            totalProducts={orderItem.totalProducts}
           />
-        </Link>;
-      })}
+        </Link>
+      ))}
     </Layout>
   );
 }
