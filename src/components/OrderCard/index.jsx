@@ -2,9 +2,7 @@ import { XMarkIcon } from '@heroicons/react/24/solid';
 import React from 'react';
 
 const OrderCard = (props) => {
-  const { title, image, price } = props;
-  // Verificar si 'category' existe y tiene la propiedad 'image'
-  console.log(props);
+  const { id, title, image, price, handleDelete } = props;
   //const categoryImage = category && category.image ? category.image : null;
 
   return (
@@ -21,7 +19,10 @@ const OrderCard = (props) => {
       </div>
       <div className='flex items-center gap-2'>
         <p className='text-lg font-medium'> {price}</p>
-        <XMarkIcon className='h-6 w-6 text-black cursor-pointer'></XMarkIcon>
+        <XMarkIcon
+          className='h-6 w-6 text-black cursor-pointer'
+          onClick={() => handleDelete(id)}
+        ></XMarkIcon>
       </div>
     </div>
   );

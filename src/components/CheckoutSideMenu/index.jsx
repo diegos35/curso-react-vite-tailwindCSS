@@ -4,8 +4,17 @@ import { useContext } from 'react';
 import OrderCard from '../OrderCard';
 
 const CheckoutSideMenu = () => {
-  const { isCheckoutSideMenuOpen, closeCheckoutSideMenu, carProducts } =
-    useContext(ShoppingCartContext);
+  const {
+    isCheckoutSideMenuOpen,
+    closeCheckoutSideMenu,
+    carProducts,
+    setcarProducts,
+  } = useContext(ShoppingCartContext);
+
+  const handleDelete = (id) => {
+    const filterProducts = carProducts.filter((product) => product.id !== id);
+    setcarProducts(filterProducts);
+  };
 
   return (
     <aside
@@ -22,10 +31,12 @@ const CheckoutSideMenu = () => {
       <div className='px-6 overflow-y-scroll'>
         {carProducts.map((product) => (
           <OrderCard
+            id={product.id}
             key={product.id}
             title={product.title}
             price={product.price}
             image={product?.images}
+            handleDelete={handleDelete}
           />
         ))}
       </div>
