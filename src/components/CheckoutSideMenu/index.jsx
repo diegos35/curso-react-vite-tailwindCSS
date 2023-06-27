@@ -3,7 +3,7 @@ import { ShoppingCartContext } from '../../Context';
 import { useContext } from 'react';
 import OrderCard from '../OrderCard';
 import { totalPrice } from '../../utils';
-
+import { Link } from 'react-router-dom';
 const CheckoutSideMenu = () => {
   const {
     isCheckoutSideMenuOpen,
@@ -47,7 +47,7 @@ const CheckoutSideMenu = () => {
         </div>
       </div>
       <div className='px-6 overflow-y-scroll flex-1'>
-        {carProducts.map((product) => (
+        {carProducts?.map((product) => (
           <OrderCard
             id={product.id}
             key={product.id}
@@ -65,12 +65,14 @@ const CheckoutSideMenu = () => {
             ${totalPrice(carProducts)}
           </span>
         </p>
-        <button
-          className='bg-black py-3 text-white w-full rounded'
-          onClick={() => handleCheckout()}
-        >
-          Checkout
-        </button>
+        <Link to='/my-orders/last'>
+          <button
+            className='bg-black py-3 text-white w-full rounded'
+            onClick={() => handleCheckout()}
+          >
+            Checkout
+          </button>
+        </Link>
       </div>
     </aside>
   );
